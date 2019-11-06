@@ -1,7 +1,7 @@
 from nltk.corpus import movie_reviews
 import nltk
 import random
-
+import pickle
 #documents=  [list(movie_reviews.words(fileid)),category) 
 #                for category in movie_reviews.categories() 
 #                for fileid in movie_reviews.fileids(category) 
@@ -49,5 +49,14 @@ test_set=featuresets[1900:]
 naive_classifier=nltk.NaiveBayesClassifier.train(train_set)
 
 print("Accuracy of Model : " , nltk.classify.accuracy(naive_classifier,test_set)*100)        
+#
+#print(naive_classifier.show_most_informative_features(15))
+#
+##saving with pickle
 
-print(naive_classifier.show_most_informative_features(15))
+#save_classifier=open("naivebayes.pickle","wb")
+pickle.dump(naive_classifier,save_classifier)
+
+#loading pickle
+load_classifier=open("naivebayes.pickle","rb")
+naive_classifier=pickle.load(load_classifier)
